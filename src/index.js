@@ -6,7 +6,7 @@ import { extractAliasFields } from './event/alias';
 import { extractGroupFields } from './event/group';
 
 
-function emit(type: string, fields: Array) {
+function emit(type, fields) {
   window.analytics && window.analytics[type](...fields);
 }
 
@@ -14,13 +14,13 @@ function createTracker() {
   return () =>  next => action => handleAction(next, action);
 }
 
-function handleAction(next: Function, action: Object) {
+function handleAction(next, action) {
   if (action.meta && action.meta.analytics) return handleSpec(next, action);
 
   return handleActionType(next, action);
 }
 
-function getFields(type: string, fields: Object, actionType: string) {
+function getFields(type, fields, actionType) {
   const typeFieldHandlers = {
     [EventTypes.identify]: extractIdentifyFields,
     [EventTypes.page]: extractPageFields,
@@ -40,7 +40,7 @@ function getEventType(spec) {
   return spec.eventType;
 }
 
-function handleSpec(next: Function, action: Object) {
+function handleSpec(next, action) {
   const spec = action.meta.analytics;
   const type = getEventType(spec);
   const fields = getFields(type, spec.eventPayload || {}, action.type);
@@ -50,7 +50,7 @@ function handleSpec(next: Function, action: Object) {
   return next(action);
 }
 
-function handleActionType(next: Function, action: Object) {
+function handleActionType(next, action) {
   switch (action.type) {
     case '@@router/INIT_PATH':
     case '@@router/UPDATE_PATH':

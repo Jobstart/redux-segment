@@ -1,4 +1,0 @@
-test:
-  override:
-    - make lint
-    - make test-ci

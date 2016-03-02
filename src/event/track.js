@@ -1,4 +1,4 @@
-function validateTrackFields(fields: Object, actionType: string) {
+function validateTrackFields(fields, actionType) {
   if (typeof actionType !== 'string' && !fields.event) {
     return new Error('missing event field for EventTypes.track');
   }
@@ -6,17 +6,17 @@ function validateTrackFields(fields: Object, actionType: string) {
   return null;
 }
 
-function getTrackProperties(fields: Object) {
+function getTrackProperties(fields) {
   if (!fields.properties) return [ 'event', 'options' ];
 
   return [ 'event', 'properties', 'options' ];
 }
 
-function extractFields(obj: Object, keys: Array, actionType: string) {
+function extractFields(obj, keys, actionType) {
   return keys.map(key => key === 'event' ? obj[key] || actionType : obj[key]);
 }
 
-function extractTrackFields(fields: Object, actionType: string) {
+function extractTrackFields(fields, actionType) {
   const props = getTrackProperties(fields);
 
   const err = validateTrackFields(fields, actionType);

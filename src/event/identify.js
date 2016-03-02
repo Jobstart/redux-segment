@@ -1,14 +1,14 @@
-function getIdentifyProperties(fields: Object) {
+function getIdentifyProperties(fields) {
   if (!fields.userId) return [ 'traits', 'options' ];
 
   return [ 'userId', 'traits', 'options' ];
 }
 
-function extractFields(obj: Object, keys: Array) {
+function extractFields(obj, keys) {
   return keys.map(key => key === 'traits' ? obj[key] || {} : obj[key]);
 }
 
-function extractIdentifyFields(fields: Object) {
+function extractIdentifyFields(fields) {
   // all fields are optional for identify events
   if (!fields) {
     return [];

@@ -1,4 +1,4 @@
-function validatePageFields(fields: Object) {
+function validatePageFields(fields) {
   if (fields.category && !fields.name) {
     return new Error('missing name field for EventTypes.page');
   }
@@ -6,18 +6,18 @@ function validatePageFields(fields: Object) {
   return null;
 }
 
-function getPageProperties(fields: Object) {
+function getPageProperties(fields) {
   if (fields.category) return [ 'category', 'name', 'properties', 'options' ];
   if (!fields.name) return [ 'properties', 'options' ];
 
   return [ 'name', 'properties', 'options' ];
 }
 
-function extractFields(obj: Object, keys: Array) {
+function extractFields(obj, keys) {
   return keys.map(key => key === 'properties' ? obj[key] || {} : obj[key]);
 }
 
-function extractPageFields(fields: Object) {
+function extractPageFields(fields) {
   // all fields are optional for page events
   if (!fields) {
     return [];
