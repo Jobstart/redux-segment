@@ -7,7 +7,8 @@ import { extractGroupFields } from './event/group';
 
 
 function emit(type, fields) {
-  window.analytics && window.analytics[type](...fields);
+  const f = fields || {};
+  window.analytics && window.analytics[type](...f);
 }
 
 function createTracker() {
